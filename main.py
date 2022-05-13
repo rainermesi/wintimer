@@ -1,29 +1,25 @@
-import tkinter as tk
-import tkinter.ttk as ttk
+import tkinter
+import customtkinter
+import time
+from datetime import datetime
 
-window = ttk.Tk()
+customtkinter.set_appearance_mode("dark")  # Modes: system (default), light, dark
+customtkinter.set_default_color_theme("blue")  # Themes: blue (default), dark-blue, green
 
-title_label = ttk.Label(
-    text='This is a simple timer',
-    )
+root_tk = customtkinter.CTk()  # create CTk window like you do with the Tk window
+root_tk.geometry("400x240")
 
-time_label = ttk.Label(
-    text='00:00:00'
-)
+start_time = datetime.now().strftime("%H:%M:%S")
 
-button_label = ttk.Button(
-    text='Start timer',
-)
+def button_function():
+    print('Button press')
 
-progress = ttk.Progressbar(orient='horizontal', length=500, mode='determinate',value=15)
+# Label
+label = customtkinter.CTkLabel(master=root_tk, text=f"{start_time}")
+label.place(relx=0.5, rely=0.2, anchor=tkinter.CENTER)
 
-title_label.pack()
-time_label.pack()
-progress.pack()
-button_label.pack()
+# Use CTkButton instead of tkinter Button
+button = customtkinter.CTkButton(master=root_tk, text="Button", command=button_function)
+button.place(relx=0.5, rely=0.5, anchor=tkinter.CENTER)
 
-window.mainloop()
-
-
-#reference
-#https://realpython.com/python-gui-tkinter/#building-your-first-python-gui-application-with-tkinter
+root_tk.mainloop()
